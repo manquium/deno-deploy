@@ -5,6 +5,11 @@ router.get("/", (ctx) => {
   ctx.response.body = "Hello world!";
 });
 
+router.get("/hello/:name", (ctx) => {
+    ctx.response.body = `Hello ${ctx.params.name?ctx.params.name:"Peter"}!`;
+});
+  
+
 const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
