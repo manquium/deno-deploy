@@ -1,12 +1,16 @@
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
-import { Application } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+
+const router = new Router();
+router.get("/", (ctx) => {
+  ctx.response.body = "Hello world!";
+});
 
 const app = new Application();
+app.use(router.routes());
+app.use(router.allowedMethods());
 
-
-app.use((ctx) => {
-    ctx.response.body = "Hello World!";
-  })
-
-
-addEventListener("fetch",app.fetchEventHandler);
+app.addEventListener(
+  "listen",
+  (e) => console.log("Listening on http://localhost:8080"),
+);
+await app.listen({ port: 8080 });
