@@ -1,14 +1,20 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
-import {page} from "./page.tsx";
-
 
 const router = new Router();
 router.get("/", (ctx) => {
   ctx.response.body = "Hello world!";
 });
 
-router.get("/hello", (ctx) => {
-  ctx.response.body = page({});
+router.get("/hello", async (ctx) => {
+  ctx.response.type = "html";
+  ctx.response.body = `<html>
+                  <head>
+                    <title>Hello from JSX</title>
+                  </head>
+                  <body>
+                  <div>Hello please write a name in the url after /hello/..</div>
+                  </body>
+                </html>`;
 });
 
 router.get("/hello/:name", (ctx) => {
