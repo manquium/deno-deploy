@@ -9,4 +9,4 @@ app.use((ctx) => {
   })
 
 
-serve(app.fetchEventHandler);
+addEventListener("fetch",app.fetchEventHandler);
