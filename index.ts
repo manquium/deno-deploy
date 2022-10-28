@@ -1,9 +1,12 @@
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { Application } from "https://deno.land/x/oak/mod.ts";
+
+const app = new Application();
 
 
-function Handler(_req){
-    return new Response("Hello World! 23", {
-        headers: { "content-type": "text/plain" },
-      });
-}
-serve(Handler);
+app.use((ctx) => {
+    ctx.response.body = "Hello World!";
+  })
+
+
+serve(app.fetchEventHandler);
